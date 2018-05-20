@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftPasscodeLock"
-  s.version      = "1.1.1"
+  s.version      = "1.1.2"
   s.summary      = "Pin code validation written in swift"
 
   # This description is used to generate tags and improve search results.
@@ -93,7 +93,7 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "**/*.{h,m,swift}"
-  # s.exclude_files = "Classes/Exclude"
+  s.exclude_files = "PasscodeLockDemo"
 
   # s.public_header_files = "Classes/**/*.h"
 
