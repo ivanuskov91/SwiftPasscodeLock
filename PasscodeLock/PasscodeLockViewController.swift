@@ -16,7 +16,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         case changePasscode
         case removePasscode
         
-        func getState() -> PasscodeLockStateType {
+        public func getState() -> PasscodeLockStateType {
             
             switch self {
             case .enterPasscode: return EnterPasscodeState()
@@ -102,7 +102,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         titleLabel?.text = passcodeLock.state.title
         descriptionLabel?.text = passcodeLock.state.description
-        cancelButton?.isEnabled = passcodeLock.state.isCancellableAction
+        if (!passcodeLock.state.isCancellableAction) {
+            cancelButton?.setTitle("", for: .normal)
+        }
         touchIDButton?.isHidden = !passcodeLock.isTouchIDAllowed
     }
     
@@ -206,12 +208,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             initialSpringVelocity: 0,
             options: [],
             animations: {
-                
                 self.placeholdersX?.constant = 0
                 self.view.layoutIfNeeded()
             },
             completion: { completed in
-                
                 self.isPlaceholdersAnimationCompleted = true
                 self.animatePlaceholders(self.placeholders, toState: .inactive)
         })

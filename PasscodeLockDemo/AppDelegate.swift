@@ -13,18 +13,16 @@ import PasscodeLock
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    lazy var passcodeLockPresenter: PasscodeLockPresenter = {
-        
-        let configuration = PasscodeLockConfiguration()
-        let presenter = PasscodeLockPresenter(mainWindow: self.window, configuration: configuration)
-        
-        return presenter
-    }()
+    var presenter: PasscodeLockPresenter?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        passcodeLockPresenter.presentPasscodeLock()
+        let configuration = PasscodeLockConfiguration()
+        presenter = PasscodeLockPresenter(mainWindow: self.window,
+                                              configuration: configuration,
+                                              state: PasscodeLockViewController.LockState.enterPasscode.getState())
+        presenter?.presentPasscodeLock()
+    
         
         return true
     }
@@ -38,7 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        passcodeLockPresenter.presentPasscodeLock()
+        let configuration = PasscodeLockConfiguration()
+        presenter = PasscodeLockPresenter(mainWindow: self.window,
+                                              configuration: configuration,
+                                              state: PasscodeLockViewController.LockState.enterPasscode.getState())
+        presenter?.presentPasscodeLock()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
