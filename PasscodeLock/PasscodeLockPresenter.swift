@@ -24,13 +24,18 @@ open class PasscodeLockPresenter {
     
     fileprivate let passcodeConfiguration: PasscodeLockConfigurationType
     fileprivate let passcodeState: PasscodeLockStateType
+    
+    open let passcodeLockVC: PasscodeLockViewController
     open var isPasscodePresented = false
     
-    public init(mainWindow window: UIWindow?, configuration: PasscodeLockConfigurationType, state: PasscodeLockStateType) {
+    public init(mainWindow window: UIWindow?,
+                configuration: PasscodeLockConfigurationType,
+                state: PasscodeLockStateType) {
         mainWindow = window
         mainWindow?.windowLevel = 1
         passcodeConfiguration = configuration
         passcodeState = state
+        passcodeLockVC = PasscodeLockViewController(state: passcodeState, configuration: passcodeConfiguration)
     }
     
     open func presentPasscodeLock() {
@@ -44,14 +49,11 @@ open class PasscodeLockPresenter {
         
         mainWindow?.windowLevel = 1
         mainWindow?.endEditing(true)
-        
-        let passcodeLockVC = PasscodeLockViewController(state: passcodeState, configuration: passcodeConfiguration)
+
         let userDismissCompletionCallback = passcodeLockVC.dismissCompletionCallback
         
         passcodeLockVC.dismissCompletionCallback = { [weak self] in
-            
             userDismissCompletionCallback?()
-            
             self?.dismissPasscodeLock()
         }
         
@@ -64,11 +66,8 @@ open class PasscodeLockPresenter {
         mainWindow?.makeKeyAndVisible()
         
         if animated {
-        
             animatePasscodeLockDismissal()
-            
         } else {
-            
             passcodeLockWindow.windowLevel = 0
             passcodeLockWindow.rootViewController = nil
         }
@@ -82,11 +81,9 @@ open class PasscodeLockPresenter {
             initialSpringVelocity: 0,
             options: UIViewAnimationOptions(),
             animations: { [weak self] in
-                
                 self?.passcodeLockWindow.alpha = 0
             },
             completion: { [weak self] _ in
-                
                 self?.passcodeLockWindow.windowLevel = 0
                 self?.passcodeLockWindow.rootViewController = nil
                 self?.passcodeLockWindow.alpha = 1
