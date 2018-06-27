@@ -15,13 +15,13 @@ public struct SetPasscodeState: PasscodeLockStateType {
     public let isCancellableAction = true
     public var isTouchIDAllowed = false
     
-    init(title: String, description: String) {
+    public init(title: String, description: String) {
         
         self.title = title
         self.description = description
     }
     
-    init() {
+    public init() {
         
         title = localizedStringFor("PasscodeLockSetTitle", comment: "Set passcode title")
         description = localizedStringFor("PasscodeLockSetDescription", comment: "Set passcode description")

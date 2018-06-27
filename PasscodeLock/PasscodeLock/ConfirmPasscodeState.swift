@@ -17,7 +17,7 @@ public struct ConfirmPasscodeState: PasscodeLockStateType {
     
     fileprivate var passcodeToConfirm: [String]
     
-    init(passcode: [String]) {
+    public init(passcode: [String]) {
         
         passcodeToConfirm = passcode
         title = localizedStringFor("PasscodeLockConfirmTitle", comment: "Confirm passcode title")

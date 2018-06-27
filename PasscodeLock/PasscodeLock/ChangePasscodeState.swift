@@ -15,7 +15,7 @@ public struct ChangePasscodeState: PasscodeLockStateType {
     public let isCancellableAction = true
     public var isTouchIDAllowed = false
     
-    init() {
+    public init() {
         
         title = localizedStringFor("PasscodeLockChangeTitle", comment: "Change passcode title")
         description = localizedStringFor("PasscodeLockChangeDescription", comment: "Change passcode description")
