@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class PasscodeLockPresenter {
+public class PasscodeLockPresenter {
     
     fileprivate var mainWindow: UIWindow?
     
@@ -25,8 +25,8 @@ open class PasscodeLockPresenter {
     fileprivate let passcodeConfiguration: PasscodeLockConfigurationType
     fileprivate let passcodeState: PasscodeLockStateType
     
-    open let passcodeLockVC: PasscodeLockViewController
-    open var isPasscodePresented = false
+    public let passcodeLockVC: PasscodeLockViewController
+    public var isPasscodePresented = false
     
     public init(mainWindow window: UIWindow?,
                 configuration: PasscodeLockConfigurationType,
@@ -38,7 +38,7 @@ open class PasscodeLockPresenter {
         passcodeLockVC = PasscodeLockViewController(state: passcodeState, configuration: passcodeConfiguration)
     }
     
-    open func presentPasscodeLock() {
+    public func presentPasscodeLock() {
         guard passcodeConfiguration.repository.hasPasscode else { return }
         guard !isPasscodePresented else { return }
         
@@ -60,7 +60,7 @@ open class PasscodeLockPresenter {
         passcodeLockWindow.rootViewController = passcodeLockVC
     }
     
-    open func dismissPasscodeLock(animated: Bool = true) {
+    public func dismissPasscodeLock(animated: Bool = true) {
         isPasscodePresented = false
         mainWindow?.windowLevel = 1
         mainWindow?.makeKeyAndVisible()

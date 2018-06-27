@@ -9,20 +9,20 @@
 import Foundation
 import LocalAuthentication
 
-open class PasscodeLock: PasscodeLockType {
+public class PasscodeLock: PasscodeLockType {
     
-    open weak var delegate: PasscodeLockTypeDelegate?
-    open let configuration: PasscodeLockConfigurationType
+    public weak var delegate: PasscodeLockTypeDelegate?
+    public let configuration: PasscodeLockConfigurationType
     
-    open var repository: PasscodeRepositoryType {
+    public var repository: PasscodeRepositoryType {
         return configuration.repository
     }
     
-    open var state: PasscodeLockStateType {
+    public var state: PasscodeLockStateType {
         return lockState
     }
     
-    open var isTouchIDAllowed: Bool {
+    public var isTouchIDAllowed: Bool {
         return isTouchIDEnabled() && configuration.isTouchIDAllowed && lockState.isTouchIDAllowed
     }
     
@@ -37,7 +37,7 @@ open class PasscodeLock: PasscodeLockType {
         self.configuration = configuration
     }
     
-    open func addSign(_ sign: String) {
+    public func addSign(_ sign: String) {
         
         passcode.append(sign)
         delegate?.passcodeLock(self, addedSignAtIndex: passcode.count - 1)
@@ -49,7 +49,7 @@ open class PasscodeLock: PasscodeLockType {
         }
     }
     
-    open func removeSign() {
+    public func removeSign() {
         
         guard passcode.count > 0 else { return }
         
@@ -57,7 +57,7 @@ open class PasscodeLock: PasscodeLockType {
         delegate?.passcodeLock(self, removedSignAtIndex: passcode.count)
     }
     
-    open func changeStateTo(_ state: PasscodeLockStateType) {
+    public func changeStateTo(_ state: PasscodeLockStateType) {
         DispatchQueue.main.async {
             self.lockState = state
             self.delegate?.passcodeLockDidChangeState(self)
@@ -65,7 +65,7 @@ open class PasscodeLock: PasscodeLockType {
 
     }
     
-    open func authenticateWithBiometrics() {
+    public func authenticateWithBiometrics() {
         
         guard isTouchIDAllowed else { return }
         

@@ -10,12 +10,12 @@ import Foundation
 
 public let PasscodeLockIncorrectPasscodeNotification = "passcode.lock.incorrect.passcode.notification"
 
-struct EnterPasscodeState: PasscodeLockStateType {
+public struct EnterPasscodeState: PasscodeLockStateType {
     
-    let title: String
-    let description: String
-    let isCancellableAction: Bool
-    var isTouchIDAllowed = true
+    public let title: String
+    public let description: String
+    public let isCancellableAction: Bool
+    public var isTouchIDAllowed = true
     
     fileprivate var inccorectPasscodeAttempts = 0
     fileprivate var isNotificationSent = false
@@ -27,7 +27,7 @@ struct EnterPasscodeState: PasscodeLockStateType {
         description = localizedStringFor("PasscodeLockEnterDescription", comment: "Enter passcode description")
     }
     
-    mutating func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
+    public mutating func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
         
         guard let currentPasscode = lock.repository.passcode else {
             return

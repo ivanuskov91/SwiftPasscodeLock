@@ -9,13 +9,13 @@
 import UIKit
 
 @IBDesignable
-open class PasscodeSignButton: UIButton {
+public class PasscodeSignButton: UIButton {
     
     @IBInspectable
-    open var passcodeSign: String = "1"
+    public var passcodeSign: String = "1"
     
     @IBInspectable
-    open var borderColor: UIColor = UIColor.white {
+    public var borderColor: UIColor = UIColor.white {
         didSet {
             setupView()
         }
@@ -23,7 +23,7 @@ open class PasscodeSignButton: UIButton {
 
     
     @IBInspectable
-    open var highlightBackgroundColor: UIColor = UIColor.clear {
+    public var highlightBackgroundColor: UIColor = UIColor.clear {
         didSet {
 
             setupView()
@@ -58,7 +58,7 @@ open class PasscodeSignButton: UIButton {
         }
     }
 
-    override open func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         super.draw(rect)
         self.layer.cornerRadius = rect.width/2
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-open class PasscodeSignPlaceholderView: UIView {
+public class PasscodeSignPlaceholderView: UIView {
     
     public enum State {
         case inactive
@@ -18,21 +18,21 @@ open class PasscodeSignPlaceholderView: UIView {
     }
     
     @IBInspectable
-    open var inactiveColor: UIColor = UIColor.white {
+    public var inactiveColor: UIColor = UIColor.white {
         didSet {
             setupView()
         }
     }
     
     @IBInspectable
-    open var activeColor: UIColor = UIColor.gray {
+    public var activeColor: UIColor = UIColor.gray {
         didSet {
             setupView()
         }
     }
     
     @IBInspectable
-    open var errorColor: UIColor = UIColor.red {
+    public var errorColor: UIColor = UIColor.red {
         didSet {
             setupView()
         }
@@ -50,7 +50,7 @@ open class PasscodeSignPlaceholderView: UIView {
         super.init(coder: aDecoder)
     }
     
-    open override var intrinsicContentSize : CGSize {
+    public override var intrinsicContentSize : CGSize {
         
         return CGSize(width: 16, height: 16)
     }
@@ -72,7 +72,7 @@ open class PasscodeSignPlaceholderView: UIView {
         }
     }
     
-    open func animateState(_ state: State) {
+    public func animateState(_ state: State) {
         
         let colors = colorsForState(state)
         

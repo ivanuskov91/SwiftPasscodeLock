@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct ConfirmPasscodeState: PasscodeLockStateType {
+public struct ConfirmPasscodeState: PasscodeLockStateType {
     
-    let title: String
-    let description: String
-    let isCancellableAction = true
-    var isTouchIDAllowed = false
+    public let title: String
+    public let description: String
+    public let isCancellableAction = true
+    public var isTouchIDAllowed = false
     
     fileprivate var passcodeToConfirm: [String]
     
@@ -24,7 +24,7 @@ struct ConfirmPasscodeState: PasscodeLockStateType {
         description = localizedStringFor("PasscodeLockConfirmDescription", comment: "Confirm passcode description")
     }
     
-    func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
+    public func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
         
         if passcode == passcodeToConfirm {
             
