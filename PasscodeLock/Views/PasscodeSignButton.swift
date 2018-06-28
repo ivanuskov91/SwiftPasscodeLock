@@ -23,9 +23,8 @@ public class PasscodeSignButton: UIButton {
 
     
     @IBInspectable
-    public var highlightBackgroundColor: UIColor = UIColor.white {
+    public var highlightBackgroundColor: UIColor = UIColor.white.withAlphaComponent(0.5) {
         didSet {
-
             setupView()
         }
     }
