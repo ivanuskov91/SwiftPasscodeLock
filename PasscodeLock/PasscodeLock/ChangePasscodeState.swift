@@ -12,13 +12,15 @@ public struct ChangePasscodeState: PasscodeLockStateType {
     
     public let title: String
     public let description: String
+    public let stringsForState: LocalizedStringsForConfirm
     public let isCancellableAction = true
     public var isTouchIDAllowed = false
     
-    public init() {
+    public init(strings: LocalizedStringsForConfirm) {
+        stringsForState = strings
         
-        title = localizedStringFor("PasscodeLockChangeTitle", comment: "Change passcode title")
-        description = localizedStringFor("PasscodeLockChangeDescription", comment: "Change passcode description")
+        title = stringsForState.changeTitle
+        description = stringsForState.changeDescription
     }
     
     public func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
@@ -29,7 +31,7 @@ public struct ChangePasscodeState: PasscodeLockStateType {
         
         if passcode == currentPasscode {
             
-            let nextState = SetPasscodeState()
+            let nextState = SetPasscodeState(strings: stringsForState, tryAgain: false)
             
             lock.changeStateTo(nextState)
             

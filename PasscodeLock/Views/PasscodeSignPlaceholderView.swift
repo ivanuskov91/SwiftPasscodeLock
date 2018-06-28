@@ -18,21 +18,21 @@ public class PasscodeSignPlaceholderView: UIView {
     }
     
     @IBInspectable
-    public var inactiveColor: UIColor = UIColor.white {
+    public var inactiveColor: UIColor = UIColor.clear {
         didSet {
             setupView()
         }
     }
     
     @IBInspectable
-    public var activeColor: UIColor = UIColor.gray {
+    public var activeColor: UIColor = UIColor.white {
         didSet {
             setupView()
         }
     }
     
     @IBInspectable
-    public var errorColor: UIColor = UIColor.red {
+    public var errorColor: UIColor = UIColor.white {
         didSet {
             setupView()
         }
@@ -52,13 +52,13 @@ public class PasscodeSignPlaceholderView: UIView {
     
     public override var intrinsicContentSize : CGSize {
         
-        return CGSize(width: 16, height: 16)
+        return CGSize(width: 13, height: 13)
     }
     
     fileprivate func setupView() {
         
         layer.cornerRadius = 8
-        layer.borderWidth = 1
+        layer.borderWidth = 2
         layer.borderColor = activeColor.cgColor
         backgroundColor = inactiveColor
     }

@@ -19,12 +19,12 @@ public struct EnterPasscodeState: PasscodeLockStateType {
     
     fileprivate var inccorectPasscodeAttempts = 0
     fileprivate var isNotificationSent = false
-    
-    public init(allowCancellation: Bool = false) {
-        
+
+    public init(titleMessage: String, descriptionMessage: String, allowCancellation: Bool = false) {
+
         isCancellableAction = allowCancellation
-        title = localizedStringFor("PasscodeLockEnterTitle", comment: "Enter passcode title")
-        description = localizedStringFor("PasscodeLockEnterDescription", comment: "Enter passcode description")
+        title = titleMessage
+        description = descriptionMessage
     }
     
     public mutating func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {

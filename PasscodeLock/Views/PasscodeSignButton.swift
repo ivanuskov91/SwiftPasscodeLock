@@ -23,7 +23,7 @@ public class PasscodeSignButton: UIButton {
 
     
     @IBInspectable
-    public var highlightBackgroundColor: UIColor = UIColor.clear {
+    public var highlightBackgroundColor: UIColor = UIColor.white {
         didSet {
 
             setupView()
@@ -48,7 +48,7 @@ public class PasscodeSignButton: UIButton {
     
     fileprivate func setupView() {
         
-        layer.borderWidth = 1
+        layer.borderWidth = 1.5
         //self.layer.cornerRadius = self.frame.width/2
         layer.borderColor = borderColor.cgColor
         

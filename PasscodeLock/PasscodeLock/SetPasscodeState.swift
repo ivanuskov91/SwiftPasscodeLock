@@ -12,24 +12,24 @@ public struct SetPasscodeState: PasscodeLockStateType {
     
     public let title: String
     public let description: String
+    public let stringsForState: LocalizedStringsForConfirm
     public let isCancellableAction = true
     public var isTouchIDAllowed = false
-    
-    public init(title: String, description: String) {
-        
-        self.title = title
-        self.description = description
-    }
-    
-    public init() {
-        
-        title = localizedStringFor("PasscodeLockSetTitle", comment: "Set passcode title")
-        description = localizedStringFor("PasscodeLockSetDescription", comment: "Set passcode description")
+
+    public init(strings: LocalizedStringsForConfirm, tryAgain: Bool) {
+        stringsForState = strings
+        if tryAgain {
+            title = strings.tryAgainTitle
+            description = strings.tryAgainDescription
+        } else {
+            title = strings.title
+            description = strings.description
+        }
     }
     
     public func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
         
-        let nextState = ConfirmPasscodeState(passcode: passcode)
+        let nextState = ConfirmPasscodeState(passcode: passcode, strings: stringsForState)
         
         lock.changeStateTo(nextState)
     }

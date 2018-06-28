@@ -17,12 +17,23 @@ public class PasscodeLockViewController: UIViewController, PasscodeLockTypeDeleg
         case removePasscode
         
         public func getState() -> PasscodeLockStateType {
+            var strings = LocalizedStringsForConfirm()
+            strings.title = localizedStringFor("PasscodeLockSetTitle", comment: "Set passcode title")
+            strings.description = localizedStringFor("PasscodeLockSetDescription", comment: "Set passcode description")
+            strings.confirmTitle = localizedStringFor("PasscodeLockConfirmTitle", comment: "Confirm passcode title")
+            strings.confirmDescription = localizedStringFor("PasscodeLockConfirmDescription", comment: "Confirm passcode description")
+            strings.tryAgainTitle = localizedStringFor("PasscodeLockMismatchTitle", comment: "Passcode mismatch title")
+            strings.tryAgainDescription = localizedStringFor("PasscodeLockMismatchDescription", comment: "Passcode mismatch description")
+            strings.changeTitle = localizedStringFor("PasscodeLockChangeTitle", comment: "Change passcode title")
+            strings.changeDescription = localizedStringFor("PasscodeLockChangeDescription", comment: "Change passcode description")
             
             switch self {
-            case .enterPasscode: return EnterPasscodeState()
-            case .setPasscode: return SetPasscodeState()
-            case .changePasscode: return ChangePasscodeState()
-            case .removePasscode: return EnterPasscodeState(allowCancellation: true)
+            case .enterPasscode: return EnterPasscodeState(titleMessage: localizedStringFor("PasscodeLockEnterTitle", comment: "Enter passcode title"),
+                                                           descriptionMessage: localizedStringFor("PasscodeLockEnterDescription", comment: "Enter passcode description"))
+            case .setPasscode: return SetPasscodeState(strings: strings, tryAgain: false)
+            case .changePasscode: return ChangePasscodeState(strings: strings)
+            case .removePasscode: return EnterPasscodeState(titleMessage: localizedStringFor("PasscodeLockEnterTitle", comment: "Enter passcode title"),
+                                                            descriptionMessage: localizedStringFor("PasscodeLockEnterDescription", comment: "Enter passcode description"), allowCancellation: true)
             }
         }
     }
