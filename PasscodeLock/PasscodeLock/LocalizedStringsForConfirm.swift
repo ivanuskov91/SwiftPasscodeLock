@@ -10,6 +10,10 @@ import Foundation
 
 public struct LocalizedStringsForConfirm {
 
+    public init() {
+        
+    }
+
     public var title: String = ""
     public var description: String = ""
     public var tryAgainTitle: String = ""
