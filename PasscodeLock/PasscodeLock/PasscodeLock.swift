@@ -21,7 +21,14 @@ public class PasscodeLock: PasscodeLockType {
     public var state: PasscodeLockStateType {
         return lockState
     }
-    
+
+    private var canEvaluatePolicyError: Error?
+
+    public var policyError: Error? {
+        _ = isTouchIDEnabled()
+        return canEvaluatePolicyError
+    }
+
     public var isTouchIDAllowed: Bool {
         return isTouchIDEnabled() && configuration.isTouchIDAllowed && lockState.isTouchIDAllowed
     }
@@ -76,7 +83,11 @@ public class PasscodeLock: PasscodeLockType {
         
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
             success, error in
-            
+            if let error = error {
+                if error.code == LAError.userCancel.rawValue {
+                    return
+                }
+            }
             self.handleTouchIDResult(success)
         }
     }
@@ -94,9 +105,15 @@ public class PasscodeLock: PasscodeLockType {
     }
     
     fileprivate func isTouchIDEnabled() -> Bool {
+        var error: NSError?
         
         let context = LAContext()
-        
-        return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+        let isEnabled = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        canEvaluatePolicyError = error
+        return isEnabled
     }
+}
+
+extension Error {
+    var code: Int { return (self as NSError).code }
 }
