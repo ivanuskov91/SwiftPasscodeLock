@@ -86,8 +86,9 @@ public class PasscodeLock: PasscodeLockType {
         DispatchQueue.main.async {
             
             if success {
-                
                 self.delegate?.passcodeLockDidSucceed(self)
+            } else {
+                self.delegate?.passcodeLockDidFail(self)
             }
         }
     }
