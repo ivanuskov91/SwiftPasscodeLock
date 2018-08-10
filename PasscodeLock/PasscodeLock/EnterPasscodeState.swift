@@ -30,6 +30,7 @@ public struct EnterPasscodeState: PasscodeLockStateType {
     public mutating func acceptPasscode(_ passcode: [String], fromLock lock: PasscodeLockType) {
         
         guard let currentPasscode = lock.repository.passcode else {
+            lock.delegate?.passcodeLockDidSucceed(lock)
             return
         }
         
